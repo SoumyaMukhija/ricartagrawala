@@ -1,11 +1,11 @@
-public class Node {
+public class CSNode {
 
-	String id, port, ipAddress;
+	String id, ip, portNum;
 	
-	public Node(String id, String port, String ipAddress) {
+	public CSNode(String id, String ip, String portNum) {
 		this.id = id;
-		this.port = port;
-		this.ipAddress = ipAddress;
+		this.ip = ip;
+		this.portNum = portNum;
 	}
 	
 	public void setID(String id) {
@@ -16,20 +16,20 @@ public class Node {
 		return id;
 	}
 	
-	public void setPort(String port) {
-		this.port = port;
+	public void setIP(String ip) {
+		this.ip = ip;
 	}
 	
-	public String getPort() {
-		return port;
-	}
-	
-	public void setIPAddress(String ipAddress) {
-		this.ipAddress = ipAddress;
-	}
-	
-	public String getIPAddress() {
-		return ipAddress;
+	public String getIP() {
+		return ip;
 	}
 
+	public void setPortNum(String portNum) {
+		this.portNum = portNum;
+	}
+	
+	public String getPortNum() {
+		return portNum;
+	}
+	
 }
