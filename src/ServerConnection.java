@@ -1,17 +1,18 @@
 import java.io.*;
+import java.net.*;
 
 // ServerConnection processes commands, sends receive requests.
 public class ServerConnection {
     Socket clients;
-    String nodeId, remoteId;
+    String nodeID, remoteID;
     BufferedReader in;
     PrintWriter out;
     Server parent;
 
     // ServerConnection is used for making the connection with the server.
-    public ServerConnection(Socket clients, String nodeId, Boolean isServer,Server parent) {
+    public ServerConnection(Socket clients, String nodeID, Boolean isServer,Server parent) {
         this.clients = clients;
-        this.nodeId = nodeId;
+        this.nodeID = nodeID;
         this.parent = parent;
 
         try{
@@ -24,8 +25,8 @@ public class ServerConnection {
             if(!isServer) {
                 out.println("SEND_CLIENT_ID");
                 System.out.println("Waiting for client ID...");
-                remoteId = in.readLine();
-                System.out.println("Client ID " + remoteId + " has been received.");
+                remoteID = in.readLine();
+                System.out.println("Client ID " + remoteID + " has been received.");
             }
         }
         catch (Exception e){}
@@ -51,22 +52,22 @@ public class ServerConnection {
 
             else if(input.equals("WRITE_TO_FILE")){
                 System.out.println("Writing to file now...");
-                String fileName = cmd.readLine();
-                String reqClientId = cmd.readLine();
+                String filename = cmd.readLine();
+                String reqClientID = cmd.readLine();
                 String reqClientTS = cmd.readLine();
-                parent.writeToFile(fileName, new Message(reqClientId,reqClientTS));
+                parent.writeToFile(filename, new Message(reqClientID, reqClientTS));
             }
 
             else if(input.equals("READ_FROM_FILE")){
                 System.out.println("Reading from file now...");
-                String fileName = cmd.readLine();
-                String reqClientId = cmd.readLine();
-                parent.readLastFile(fileName , reqClientId);
+                String filename = cmd.readLine();
+                String reqClientID = cmd.readLine();
+                parent.readLastOfFile(filename , reqClientID);
             }
 
             else if( input.equals("ENQUIRE")){
-                String reqClientId = cmd.readLine();
-                parent.fileHostedString(reqClientId);
+                String reqClientID = cmd.readLine();
+                parent.fileHostedString(reqClientID);
             }
 
         }
@@ -75,19 +76,19 @@ public class ServerConnection {
     }
 
     // sendLastMessageOnFile returns the last message that was written on the file.
-    public synchronized void sendLastMessageOnFile (String fileName, Message lastMsg){
+    public synchronized void sendLastMessageOnFile (String filename, Message lastMsg){
         out.println("READ_FROM_FILE_ACK");
-        out.println(this.nodeId);
-        out.println(fileName);
-        out.println(lastMsg.getClientId());
-        out.println(lastMsg.getTimeStamp());
+        out.println(this.nodeID);
+        out.println(filename);
+        out.println(lastMsg.getClientID());
+        out.println(lastMsg.getTimestamp());
     }
 
-    // sendWriteAcknowledge sends ACK for writing on files.
-    public synchronized void sendWriteAcknowledge(String fileName){
-        System.out.println("Sending write ACK for " + fileName);
+    // sendWriteAck sends acknowledge for writing on files.
+    public synchronized void sendWriteAck(String filename){
+        System.out.println("Sending write ACK for " + filename);
         out.println("WRITE_TO_FILE_ACK");
-        out.println(fileName);
+        out.println(filename);
     }
 
     // sendHostedFiles sends response of ENQUIRE, information about the list of hosted files.
@@ -102,14 +103,14 @@ public class ServerConnection {
         out.println("P");
     }
 
-    // Getter function for remoteId.
-    public String getremoteId() {
-        return remoteId;
+    // Getter function for remoteID.
+    public String getremoteID() {
+        return remoteID;
     }
 
-    // Setter function for remoteId.
-    public void setremoteId(String remoteId) {
-        this.remoteId = remoteId;
+    // Setter function for remoteID.
+    public void setremoteID(String remoteID) {
+        this.remoteID = remoteID;
     }
 
     // getOtherClient returns all other clients.

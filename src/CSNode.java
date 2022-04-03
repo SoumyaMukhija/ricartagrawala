@@ -6,6 +6,7 @@ public class CSNode {
 		this.id = id;
 		this.ip = ip;
 		this.portNum = portNum;
+		this.machInfo = machInfo;
 	}
 	
 	public void setID(String id) {

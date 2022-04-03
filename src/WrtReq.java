@@ -20,7 +20,7 @@ public class WrtReq {
 		this.msg = msg;
 	}
 	
-	public String getMsg() {
+	public Message getMsg() {
 		return msg;
 	}
 	

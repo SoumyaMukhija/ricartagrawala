@@ -1,6 +1,6 @@
 public class Message {
 	
-	String clientID, timestamp;
+	String clientID, timestamp; //timestamp retained in String type for simplicity
 	
 	public Message(String clientID, String timestamp) {
 		this.clientID = clientID;
@@ -14,6 +14,8 @@ public class Message {
 	public String getClientID() {
 		return clientID;
 	}
+
+	//timestamp can be parsed appropriately 
 	
 	public void setTimestamp(String timestamp) {
 		this.timestamp = timestamp;
