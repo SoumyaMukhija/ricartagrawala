@@ -1,6 +1,6 @@
 import java.io.*; //BufferedReader, FileReader, IOException
 import java.net.*; //InetAddress, ServerSocket, Socket
-import java.util.concurrent.*; //Executors, ScheduledExecutorService, TimeUnit
+//import java.util.concurrent.*; //Executors, ScheduledExecutorService, TimeUnit
 import java.util.regex.*; //Matcher, Pattern
 import java.util.*;
 
@@ -39,19 +39,19 @@ public class Client {
         this.id = id;
     }
 
-    public List getClientNodes() {
+    public List<CSNode> getClientNodes() {
         return this.clientNodes;
     }
 
-    public void setClientNodes(List clientNodes) {
+    public void setClientNodes(List<CSNode> clientNodes) {
         this.clientNodes = clientNodes;
     }
 
-    public List getServerNodes() {
+    public List<CSNode> getServerNodes() {
         return this.serverNodes;
     }
 
-    public void setServerNodes(List serverNodes) {
+    public void setServerNodes(List<CSNode> serverNodes) {
         this.serverNodes = serverNodes;
     }
 
@@ -435,7 +435,7 @@ public class Client {
                 String line = br.readLine();
                 while (line != null) {
                     sb.append(line);
-                    List<String> parsed_client = Arrays.asList(line.split("|"));
+                    List<String> parsed_client = Arrays.asList(line.split(","));
                     CSNode n_client= new CSNode(parsed_client.get(0),parsed_client.get(1),parsed_client.get(2),parsed_client.get(3));
                     this.getClientNodes().add(n_client);
                     sb.append(System.lineSeparator());
@@ -463,7 +463,7 @@ public class Client {
                 String line = br.readLine();
                 while (line != null) {
                     sb.append(line);
-                    List<String> parsed_server = Arrays.asList(line.split("|"));
+                    List<String> parsed_server = Arrays.asList(line.split(","));
                     CSNode n_server = new CSNode(parsed_server.get(0),parsed_server.get(1),parsed_server.get(2),parsed_server.get(3));
                     this.getServerNodes().add(n_server);
                     sb.append(System.lineSeparator());

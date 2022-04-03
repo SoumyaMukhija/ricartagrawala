@@ -128,13 +128,13 @@ public class Server {
     //Consume the configuration file and set work folder for specified server ID
     public void setServerFolder() {
         try {
-            BufferedReader bfr = new BufferedReader(new FileReader("serverFolders.txt"));
+            BufferedReader bfr = new BufferedReader(new FileReader("ServerFolders.txt"));
             try {
                 StringBuilder sb = new StringBuilder();
                 String line = bfr.readLine();
                 while (line != null) {
                     sb.append(line);
-                    List<String> parsed_server_workFolder = Arrays.asList(line.split("|"));
+                    List<String> parsed_server_workFolder = Arrays.asList(line.split(","));
                     this.serverFolder.put(parsed_server_workFolder.get(0),parsed_server_workFolder.get(1));
                     sb.append(System.lineSeparator());
                     line = bfr.readLine();
@@ -161,7 +161,7 @@ public class Server {
                 String line = bfr.readLine();
                 while (line != null) {
                     sb.append(line);
-                    List<String> parsed_server = Arrays.asList(line.split("|"));
+                    List<String> parsed_server = Arrays.asList(line.split(","));
                     CSNode n_server = new CSNode(parsed_server.get(0),parsed_server.get(1),parsed_server.get(2),parsed_server.get(3));
                     this.getServerNodes().add(n_server);
                     sb.append(System.lineSeparator());
@@ -226,7 +226,7 @@ public class Server {
         server.setServerList();
         server.setServerFolder();
         server.serverSocket(Integer.valueOf(args[0]),server);
-        System.out.println("Started Client with ID: " + server.getID());
+        System.out.println("Started Server with ID: " + server.getID());
     }
     
 }
